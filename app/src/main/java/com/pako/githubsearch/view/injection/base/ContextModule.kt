@@ -1,4 +1,4 @@
-package com.pako.githubsearch.presentation.injection
+package com.pako.githubsearch.view.injection.base
 
 import android.content.Context
 import com.pako.githubsearch.App

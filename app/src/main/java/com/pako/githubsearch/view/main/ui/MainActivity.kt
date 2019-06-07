@@ -1,35 +1,24 @@
-package com.pako.githubsearch.presentation.main.ui
+package com.pako.githubsearch.view.main.ui
 
 import android.os.Bundle
 import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import com.pako.githubsearch.R
+import com.pako.githubsearch.presentation.main.MainView
+import com.pako.githubsearch.view.search.ui.ScrollingSearchFragment
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
         navView.setNavigationItemSelectedListener(this)
     }
 
@@ -62,12 +51,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_bookmarks -> {
-                // TODO
+                showBookmarkFragment()
             }
 
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun showSearchFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, ScrollingSearchFragment()).commit()
+    }
+
+    override fun showBookmarkFragment() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

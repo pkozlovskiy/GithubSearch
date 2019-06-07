@@ -1,6 +1,6 @@
 package com.pako.githubsearch
 
-import com.pako.githubsearch.presentation.injection.DaggerApplicationComponent
+import com.pako.githubsearch.view.injection.base.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 

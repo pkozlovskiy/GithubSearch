@@ -1,6 +1,7 @@
-package com.pako.githubsearch.presentation.injection
+package com.pako.githubsearch.view.injection.base
 
 import android.app.Application
+import com.pako.githubsearch.App
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 @Component(modules = [ContextModule::class, ApplicationModule::class, AndroidSupportInjectionModule::class])
 interface ApplicationComponent : AndroidInjector<DaggerApplication> {
 
-    fun inject(application: Application)
+    fun inject(application: App)
 
     @Component.Builder
     interface Builder {

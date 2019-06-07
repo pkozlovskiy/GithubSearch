@@ -1,4 +1,4 @@
-package com.pako.githubsearch.presentation.injection
+package com.pako.githubsearch.view.injection.base
 
 import com.pako.githubsearch.remote.base.service.GithubSearchService
 import dagger.Module
