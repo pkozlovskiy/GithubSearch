@@ -1,18 +1,30 @@
 package com.pako.githubsearch.view.main.ui
 
 import android.os.Bundle
-import androidx.core.view.GravityCompat
-import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.arlib.floatingsearchview.FloatingSearchView
+import com.google.android.material.navigation.NavigationView
 import com.pako.githubsearch.R
+import com.pako.githubsearch.presentation.main.MainPresenter
 import com.pako.githubsearch.presentation.main.MainView
+import com.pako.githubsearch.view.base.BaseFragment
 import com.pako.githubsearch.view.search.ui.ScrollingSearchFragment
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView{
+class MainActivity : DaggerAppCompatActivity(), BaseFragment.BaseExampleFragmentCallbacks,
+    NavigationView.OnNavigationItemSelectedListener, MainView {
+
+    override fun onAttachSearchViewToDrawer(searchView: FloatingSearchView) {
+        searchView.attachNavigationDrawerToMenuButton(findViewById(R.id.drawer_layout))
+    }
+
+    @Inject
+    internal lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +32,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)
+
+        presenter.attach(this)
     }
 
     override fun onBackPressed() {
@@ -51,7 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_bookmarks -> {
-                showBookmarkFragment()
+                presenter.onDrawerOptionBookmarkClick()
             }
 
         }

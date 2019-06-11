@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainModule() {
+class MainActivityModule {
     @Provides
     fun provideMainPresenter(): MainPresenter {
         return MainPresenter()
